@@ -13,5 +13,19 @@
 #include "libft.h"
 
 int ft_strncmp(const char *str1, const char *str2, size_t len) {
+    size_t i;
+    i =0;
+
+    if(len == 0)
+        return 0;
     
+    while(i < len) {
+        if(str1[i] < str2[i])
+            return str1[i] - str2[i];
+        else if(str1[i] > str2[i])
+            return str1[i] - str2[i];
+        else if(str1[i] == str2[i])
+            i++;
+    }
+    return 0;
 }
