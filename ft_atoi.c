@@ -6,29 +6,30 @@
 #include "libft.h"
 
 int ft_atoi (const char *cStr) {
-    size_t i;
-    int result;
     int sign;
-
-    i =0;
-    result =0;
+    size_t idx;
+    int result;
     sign = 1;
-
-    while(cStr[i] == ' ')
-        i++;
+    idx = 0;
+    result = 0;
     
-    while(cStr[i] == '-' || cStr[i] == '+'){
-        if(cStr[i] == '-') {
-            sign = -1;
-            i++;
+    while(cStr[idx] != '\0') {
+        if(cStr[idx] == 9 && cStr[idx] == ' ')
+            idx++;
+        else if(cStr[idx] >= '0' && cStr[idx] <= '9') {
+            result = result*10 + (cStr[idx]-'0');
+            idx++;
         }
-        else 
-            i++;
+        else if(cStr[idx] == '-') {
+            if(result < 0)
+                return 0;
+            sign = -1;
+            result *= sign;
+            idx++;
+        }
+        else {
+            idx++;
+        }
     }
-
-     while(cStr[i] >= '0' && cStr[i] <= '9') {
-        result = result *10 + (cStr[i] - '0');
-        i++;
-    }
-    return sign * result;
+    return result;
 }
